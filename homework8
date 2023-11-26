@@ -1,0 +1,35 @@
+#task 1
+import numpy as np
+import pandas as pd
+
+# Заданные значения
+zp = np.array([35, 45, 190, 200, 40, 70, 54, 150, 120, 110])
+ks = np.array([401, 574, 874, 919, 459, 739, 653, 902, 746, 832])
+
+# Ковариация "вручную"
+mean_zp = np.mean(zp)
+mean_ks = np.mean(ks)
+cov_manual = np.sum((zp - mean_zp) * (ks - mean_ks)) / (len(zp) - 1)
+
+# Ковариация с использованием функции из numpy
+cov_numpy = np.cov(zp, ks, ddof=1)[0, 1]
+
+# Коэффициент корреляции Пирсона "вручную"
+std_zp = np.std(zp, ddof=1)
+std_ks = np.std(ks, ddof=1)
+corr_manual = cov_manual / (std_zp * std_ks)
+
+# Коэффициент корреляции Пирсона с использованием функций из numpy и pandas
+corr_numpy = np.corrcoef(zp, ks)[0, 1]
+corr_pandas = pd.Series(zp).corr(pd.Series(ks))
+
+# Вывод результатов
+print(f"Ковариация (вручную): {cov_manual}")
+print(f"Ковариация (numpy): {cov_numpy}")
+print(f"Коэффициент корреляции (вручную): {corr_manual}")
+print(f"Коэффициент корреляции (numpy): {corr_numpy}")
+print(f"Коэффициент корреляции (pandas): {corr_pandas}")
+
+
+  
+
