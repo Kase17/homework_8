@@ -1,4 +1,4 @@
-#task 1
+#TASK 1
 import numpy as np
 import pandas as pd
 
@@ -29,6 +29,61 @@ print(f"Ковариация (numpy): {cov_numpy}")
 print(f"Коэффициент корреляции (вручную): {corr_manual}")
 print(f"Коэффициент корреляции (numpy): {corr_numpy}")
 print(f"Коэффициент корреляции (pandas): {corr_pandas}")
+
+# TASK 2
+import numpy as np
+from scipy.stats import norm
+
+# Заданные значения
+iq_scores = np.array([131, 125, 115, 122, 131, 115, 107, 99, 125, 111])
+
+# Уровень доверия
+confidence_level = 0.95
+
+# Среднее значение выборки
+mean_iq = np.mean(iq_scores)
+
+# Стандартное отклонение генеральной совокупности
+population_std_dev = np.std(iq_scores, ddof=1)
+
+# Размер выборки
+sample_size = len(iq_scores)
+
+# Z-значение для уровня доверия
+z_value = norm.ppf((1 + confidence_level) / 2)
+
+# Вычисление доверительного интервала
+margin_of_error = z_value * (population_std_dev / np.sqrt(sample_size))
+confidence_interval = (mean_iq - margin_of_error, mean_iq + margin_of_error)
+
+# Вывод результатов
+print(f"Доверительный интервал: {confidence_interval} при надежности {confidence_level}")
+
+
+#TASK 3
+
+import numpy as np
+from scipy.stats import norm
+
+# Известные значения
+sample_mean = 174.2
+population_variance = 25
+sample_size = 27
+confidence_level = 0.95
+
+# Вычисление стандартного отклонения генеральной совокупности
+population_std_dev = np.sqrt(population_variance)
+
+# Z-значение для уровня доверия
+z_value = norm.ppf((1 + confidence_level) / 2)
+
+# Вычисление доверительного интервала
+margin_of_error = z_value * (population_std_dev / np.sqrt(sample_size))
+confidence_interval = (sample_mean - margin_of_error, sample_mean + margin_of_error)
+
+# Вывод результатов
+print(f"Доверительный интервал: {confidence_interval} при надежности {confidence_level}")
+
 
 
   
