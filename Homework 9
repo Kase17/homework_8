@@ -1,0 +1,94 @@
+#TASKS 1
+import numpy as np
+
+# Данные
+zp = np.array([35, 45, 190, 200, 40, 70, 54, 150, 120, 110])
+ks = np.array([401, 574, 874, 919, 459, 739, 653, 902, 746, 832])
+
+# Расчет с использованием intercept
+n = len(zp)
+
+# Коэффициенты с использованием intercept
+b_intercept = (n * np.sum(zp * ks) - np.sum(zp) * np.sum(ks)) / (n * np.sum(zp**2) - np.sum(zp)**2)
+a_intercept = (np.sum(ks) - b_intercept * np.sum(zp)) / n
+
+print(f'С использованием intercept: a = {a_intercept}, b = {b_intercept}')
+
+# Расчет без использования intercept
+# Коэффициенты без intercept
+b_no_intercept = np.sum(zp * ks) / np.sum(zp**2)
+
+print(f'Без использования intercept: b = {b_no_intercept}')
+
+
+#TASK 2
+import numpy as np
+
+# Данные
+zp = np.array([35, 45, 190, 200, 40, 70, 54, 150, 120, 110])
+ks = np.array([401, 574, 874, 919, 459, 739, 653, 902, 746, 832])
+
+# Гиперпараметры
+learning_rate = 0.0001
+epochs = 1000
+
+# Инициализация коэффициента наклона
+b = 0
+
+# Градиентный спуск
+for epoch in range(epochs):
+    gradient = np.sum((b * zp - ks) * zp) / len(zp)
+    b = b - learning_rate * gradient
+
+# Вывод результата
+print(f'Коэффициент линейной регрессии (без intercept) с использованием градиентного спуска: b = {b}')
+
+
+
+#TASK 3
+import numpy as np
+
+# Данные
+zp = np.array([35, 45, 190, 200, 40, 70, 54, 150, 120, 110])
+ks = np.array([401, 574, 874, 919, 459, 739, 653, 902, 746, 832])
+
+# Гиперпараметры
+learning_rate = 0.0001
+epochs = 1000
+
+# Инициализация коэффициентов
+b = 0
+a = 0
+
+# Градиентный спуск
+for epoch in range(epochs):
+    # Обновление коэффициентов
+    b_gradient = np.sum((b * zp + a - ks) * zp) / len(zp)
+    a_gradient = np.sum(b * zp + a - ks) / len(zp)
+    
+    b = b - learning_rate * b_gradient
+    a = a - learning_rate * a_gradient
+
+# Вывод результата
+print(f'Коэффициенты линейной регрессии (с intercept) с использованием градиентного спуска: a = {a}, b = {b}')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
