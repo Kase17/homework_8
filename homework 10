@@ -1,0 +1,25 @@
+#TASK
+
+import numpy as np
+from scipy.stats import f_oneway
+
+# Заданные значения роста в трех группах
+football_heights = np.array([173, 175, 180, 178, 177, 185, 183, 182])
+hockey_heights = np.array([177, 179, 180, 188, 177, 172, 171, 184, 180])
+weightlifting_heights = np.array([172, 173, 169, 177, 166, 180, 178, 177, 172, 166, 170])
+
+# Проведение однофакторного дисперсионного анализа
+f_statistic, p_value = f_oneway(football_heights, hockey_heights, weightlifting_heights)
+
+# Вывод результатов
+print("F-статистика:", f_statistic)
+print("P-значение:", p_value)
+
+# Уровень значимости (можно выбрать свой)
+alpha = 0.05
+
+# Проверка статистической значимости
+if p_value < alpha:
+    print("Отвергаем нулевую гипотезу. Есть статистически значимые различия.")
+else:
+    print("Не отвергаем нулевую гипотезу. Нет статистически значимых различий.")
